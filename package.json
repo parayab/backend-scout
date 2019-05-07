@@ -1,0 +1,60 @@
+{
+  "name": "koa-sequelize-boilerplate",
+  "description": "A boilerplate for koa v2 using sequelize",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nrfreudenberg/koa-sequelize-boilerplate"
+  },
+  "keywords": [
+    "koa",
+    "sequelize",
+    "eslint",
+    "prettier",
+    "postgresql"
+  ],
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Nicolas Freudenberg",
+    "email": "nrfreudenberg@uc.cl"
+  },
+  "contributors": [
+    {
+      "name": "Tomas Freudenberg",
+      "email": "tefreudenberg@uc.cl"
+    }
+  ],
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "koa": "^2.6.2",
+    "koa-body": "^4.0.4",
+    "koa-helmet": "^4.0.0",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "pg": "^7.7.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^5.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "nodemon": "^1.18.8",
+    "prettier": "^1.15.3"
+  },
+  "engines": {
+    "node": "^11.2.0",
+    "yarn": "^1.12.3"
+  }
+}

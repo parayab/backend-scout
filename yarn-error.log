@@ -1,0 +1,95 @@
+Arguments: 
+  /Users/paulinaarayaburgos/.nvm/versions/node/v10.9.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js install
+
+PATH: 
+  /Users/paulinaarayaburgos/.rvm/gems/ruby-2.5.3/bin:/Users/paulinaarayaburgos/.rvm/gems/ruby-2.5.3@global/bin:/Users/paulinaarayaburgos/.rvm/rubies/ruby-2.5.3/bin:/Users/paulinaarayaburgos/.nvm/versions/node/v10.9.0/bin:/Users/paulinaarayaburgos/anaconda/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Wireshark.app/Contents/MacOS:/opt/yarn-[version]/bin:/Users/paulinaarayaburgos/.rvm/bin:/Users/paulinaarayaburgos/apache-maven-3.6.0/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  10.9.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "koa-sequelize-boilerplate",
+    "description": "A boilerplate for koa v2 using sequelize",
+    "version": "1.0.0",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/nrfreudenberg/koa-sequelize-boilerplate"
+    },
+    "keywords": [
+      "koa",
+      "sequelize",
+      "eslint",
+      "prettier",
+      "postgresql"
+    ],
+    "main": "index.js",
+    "license": "MIT",
+    "author": {
+      "name": "Nicolas Freudenberg",
+      "email": "nrfreudenberg@uc.cl"
+    },
+    "contributors": [
+      {
+        "name": "Tomas Freudenberg",
+        "email": "tefreudenberg@uc.cl"
+      }
+    ],
+    "scripts": {
+      "start": "node index.js",
+      "dev": "nodemon index.js"
+    },
+    "dependencies": {
+      "dotenv": "^6.2.0",
+      "koa": "^2.6.2",
+      "koa-body": "^4.0.4",
+      "koa-helmet": "^4.0.0",
+      "koa-logger": "^3.2.0",
+      "koa-router": "^7.4.0",
+      "koa-static": "^5.0.0",
+      "pg": "^7.7.1",
+      "pg-hstore": "^2.3.2",
+      "sequelize": "^4.42.0",
+      "sequelize-cli": "^5.4.0"
+    },
+    "devDependencies": {
+      "eslint": "^5.10.0",
+      "eslint-config-airbnb": "^17.1.0",
+      "eslint-config-prettier": "^3.3.0",
+      "eslint-plugin-import": "^2.14.0",
+      "eslint-plugin-jsx-a11y": "^6.1.2",
+      "eslint-plugin-prettier": "^3.0.0",
+      "eslint-plugin-react": "^7.11.1",
+      "nodemon": "^1.18.8",
+      "prettier": "^1.15.3"
+    },
+    "engines": {
+      "node": "^11.2.0",
+      "yarn": "^1.12.3"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Found incompatible module
+      at new MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
+      at Object.checkOne (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:62444:11)
+      at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:22773:75
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:98:30)
+      at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:116:14
+      at new Promise (<anonymous>)
+      at new F (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:23451:28)
+      at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:95:12
+      at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:22777:27
