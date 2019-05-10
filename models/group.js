@@ -30,6 +30,22 @@ module.exports = (sequelize, DataTypes) => {
     group.hasMany(models.section, {
       onDelete: "CASCADE"
     });
+    group.belongsTo(models.user, {
+      targetKey: "id",
+      foreignKey: "leaderId",
+      onDelete: "SET NULL",
+      onUpdate: "CASCADE",
+      as: "leader"
+      // enables group.getLeader()
+    });
+    group.belongsTo(models.user, {
+      targetKey: "id",
+      foreignKey: "assistantId",
+      onDelete: "SET NULL",
+      onUpdate: "CASCADE",
+      as: "assistant"
+      // enables group.getAssistant()
+    });
   };
   return group;
 };
