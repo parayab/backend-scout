@@ -2,27 +2,54 @@ module.exports = {
   up: queryInterface => {
     const sectionTypes = [
       {
-        name: "Section 1",
+        name: "Bandada",
         minAge: 7,
-        maxAge: 10,
+        maxAge: 11,
         description: "Description: section 1",
         gender: null,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name: "Section 2",
-        minAge: 11,
-        maxAge: 15,
+        name: "Manada",
+        minAge: 7,
+        maxAge: 11,
         description: "Description: section 2",
         gender: null,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name: "Section 3",
+        name: "Compañía",
+        minAge: 11,
+        maxAge: 15,
+        description: "Description: section 3",
+        gender: null,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "Tropa",
+        minAge: 11,
+        maxAge: 15,
+        description: "Description: section 4",
+        gender: null,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "Avanzada",
+        minAge: 15,
+        maxAge: 17,
+        description: "Description: section 5",
+        gender: null,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "Clan",
         minAge: 17,
-        maxAge: 20,
+        maxAge: 21,
         description: "Description: section 3",
         gender: null,
         createdAt: new Date(),

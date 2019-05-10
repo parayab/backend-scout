@@ -2,6 +2,11 @@ module.exports = {
   up: queryInterface => {
     const roles = [
       {
+        name: "Admin",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
         name: "Group leader",
         createdAt: new Date(),
         updatedAt: new Date()
