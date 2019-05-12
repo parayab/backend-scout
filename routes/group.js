@@ -1,4 +1,5 @@
 const KoaRouter = require("koa-router");
+const sectionFunctions = require("./sectionFunctions");
 
 const router = new KoaRouter();
 const sections = require("./section");
@@ -10,6 +11,11 @@ router.post("groups.create", "/", async ctx => {
   // TODO: create default section
   try {
     await newGroup.save({ fields: ["name", "foundationDate"] });
+    const newDefaultSection = await sectionFunctions.create(ctx, {
+      name: "Sin Unidad",
+      typeId: 1,
+      groupId: newGroup.id
+    });
     const groups = await ctx.orm.group.findAll();
     ctx.body = { groups };
   } catch (validationError) {
