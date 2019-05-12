@@ -33,17 +33,21 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  // eslint-disable-next-line func-names
   section.associate = function(models) {
     section.belongsTo(models.group, {
-      foreignKey: "groupId"
+      foreignKey: "groupId",
+      as: "group"
     });
     section.hasMany(models.user, {
       onDelete: "CASCADE"
     });
     section.belongsTo(models.sectionType, {
       foreignKey: "typeId",
-      constraints: true
+      as: "type"
+    });
+    section.belongsTo(models.user, {
+      foreignKey: "leaderId",
+      as: "leader"
     });
   };
   return section;
