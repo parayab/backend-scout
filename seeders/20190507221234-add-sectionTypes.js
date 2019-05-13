@@ -2,6 +2,15 @@ module.exports = {
   up: queryInterface => {
     const sectionTypes = [
       {
+        name: "Sin Unidad",
+        minAge: 7,
+        maxAge: 99,
+        description: "Sin unidad",
+        gender: null,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
         name: "Bandada",
         minAge: 7,
         maxAge: 11,

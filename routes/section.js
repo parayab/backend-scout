@@ -1,4 +1,5 @@
 const KoaRouter = require("koa-router");
+const sectionFunctions = require("./sectionFunctions");
 
 const router = new KoaRouter();
 
@@ -19,15 +20,13 @@ router.get("sections.show", "/:section_id", async ctx => {
 });
 
 router.post("sections.create", "/", async ctx => {
-  const newSection = ctx.orm.section.build(ctx.request.body);
-  newSection.groupId = ctx.params.group_id;
-  try {
-    await newSection.save({ fields: ["name", "typeId", "groupId"] });
-    const sections = await ctx.orm.section.findAll();
-    ctx.body = { sections };
-  } catch (validationError) {
-    ctx.body = { errors: validationError.errors };
-  }
+  const { name, typeId } = ctx.request.body;
+  const newSection = await sectionFunctions.create(ctx, {
+    name,
+    typeId,
+    groupId: ctx.params.group_id
+  });
+  ctx.body = newSection;
 });
 
 router.patch("sections.update", "/:section_id", async ctx => {
