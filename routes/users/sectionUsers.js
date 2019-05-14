@@ -9,7 +9,7 @@ router.get("section.users.index", "/", async ctx => {
   ctx.body = { users };
 });
 
-router.post("secion.users.create", "/", async ctx => {
+router.post("section.users.create", "/", async ctx => {
   const sectionId = ctx.params.section_id;
   const groupId = ctx.params.group_id;
 
@@ -23,6 +23,18 @@ router.post("secion.users.create", "/", async ctx => {
     return;
   }
   const sectionUsers = await ctx.orm.user.findAll({ where: { sectionId } });
+  ctx.body = { sectionUsers };
+});
+
+router.patch("section.users.patch", "/:user_id", async ctx => {
+  const editUser = await userFunctions.patch(ctx, ctx.request.body);
+  if (editUser instanceof Error) {
+    ctx.body = editUser.errors;
+    return;
+  }
+  const sectionUsers = await ctx.orm.user.findAll({
+    where: { sectionId: ctx.params.section_id }
+  });
   ctx.body = { sectionUsers };
 });
 module.exports = router;
