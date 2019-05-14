@@ -37,4 +37,19 @@ router.patch("section.users.patch", "/:user_id", async ctx => {
   });
   ctx.body = { sectionUsers };
 });
+
+router.delete("sections.user.delete", "/:user_id", async ctx => {
+  try {
+    const deleteUser = await ctx.orm.user.findOne({
+      where: { id: ctx.params.user_id }
+    });
+    await deleteUser.destroy();
+    const sectionUsers = await ctx.orm.user.findAll({
+      where: { sectionId: ctx.params.section_id }
+    });
+    ctx.body = { sectionUsers };
+  } catch (error) {
+    ctx.body = { error: error.errors };
+  }
+});
 module.exports = router;
