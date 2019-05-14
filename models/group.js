@@ -54,6 +54,14 @@ module.exports = (sequelize, DataTypes) => {
       as: "events"
       // enables group.getEvents()
     });
+    group.hasMany(models.userJoinGroupEvent, {
+      // Will add groupId to userJoinGroupEvent model
+      foreignKey: "id",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+      as: "participant"
+      // enables group.getParticipants()
+    });
   };
   return group;
 };

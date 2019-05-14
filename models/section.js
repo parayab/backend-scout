@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  section.associate = function(models) {
+  section.associate = models => {
     section.belongsTo(models.group, {
       foreignKey: "groupId",
       as: "group"

@@ -79,6 +79,14 @@ module.exports = (sequelize, DataTypes) => {
     user.belongsTo(models.role, {
       foreignKey: "roleId"
     });
+    user.hasMany(models.userJoinGroupEvent, {
+      // Will add userId to userJoinGroupEvent model
+      foreignKey: "id",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+      as: "participant"
+      // enables user.getParticipants()
+    });
   };
   return user;
 };
