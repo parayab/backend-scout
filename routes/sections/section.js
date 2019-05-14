@@ -3,8 +3,10 @@ const sectionFunctions = require("./sectionFunctions");
 
 const router = new KoaRouter();
 const users = require("../users/sectionUsers");
+const sectionEvent = require("../sectionEvent");
 
 router.use("/:section_id/users", users.routes());
+router.use("/:section_id/sectionEvent", sectionEvent.routes());
 
 router.get("sections.index", "/", async ctx => {
   const groupId = ctx.params.group_id;

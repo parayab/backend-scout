@@ -5,7 +5,7 @@ module.exports = {
         type: "foreign key",
         name: "groupEvent_hasMany_userJoin",
         references: {
-          table: "groupEvent",
+          table: "groupEvents",
           field: "id"
         },
         onDelete: "set null",
