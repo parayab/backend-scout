@@ -1,5 +1,5 @@
 module.exports = {
-  create: async function(ctx, requestBody) {
+  async create(ctx, requestBody) {
     // requestBody = {name: string, typeId: int, groupId: int}
     const newSection = ctx.orm.section.build(requestBody);
     try {

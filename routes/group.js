@@ -3,8 +3,10 @@ const sectionFunctions = require("./sections/sectionFunctions");
 
 const router = new KoaRouter();
 const sections = require("./sections/section");
+const groupEvent = require("./groupEvent");
 
 router.use("/:group_id/sections", sections.routes());
+router.use("/:group_id/groupevent", groupEvent.routes());
 
 router.post("groups.create", "/", async ctx => {
   const newGroup = ctx.orm.group.build(ctx.request.body);
