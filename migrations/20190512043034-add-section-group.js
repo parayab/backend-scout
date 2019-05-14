@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.addConstraint("sections", ["groupId"], {
@@ -15,4 +13,3 @@ module.exports = {
   down: (queryInterface, Sequelize) =>
     queryInterface.removeConstraint("sections", "section_belongs_to_group")
 };
-
