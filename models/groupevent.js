@@ -53,8 +53,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  groupEvent.associate = function(models) {
-    // associations can be defined here
+  groupEvent.associate = models => {
+    groupEvent.hasMany(models.userJoinGroupEvent, {
+      // Will add groupEventId to userJoinGroupEvent model
+      foreignKey: "id",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+      as: "participant"
+      // enables groupEvent.getParticipants()
+    });
   };
   return groupEvent;
 };

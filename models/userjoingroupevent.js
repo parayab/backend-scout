@@ -24,6 +24,23 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  userJoinGroupEvent.associate = () => {};
+  userJoinGroupEvent.associate = models => {
+    userJoinGroupEvent.belongsTo(models.groupEvent, {
+      // Will add groupEventId to userJoinGroupEvent model
+      foreignKey: "id",
+      onDelete: "set null",
+      onUpdate: "CASCADE",
+      as: "groupEvent"
+      // enables groupEvent.getParticipants()
+    });
+    userJoinGroupEvent.belongsTo(models.user, {
+      // Will add groupEventId to userJoinGroupEvent model
+      foreignKey: "id",
+      onDelete: "set null",
+      onUpdate: "CASCADE",
+      as: "user"
+      // enables groupEvent.getParticipants()
+    });
+  };
   return userJoinGroupEvent;
 };
