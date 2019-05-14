@@ -5,7 +5,8 @@ module.exports = {
     try {
       await newSection.save({ fields: ["name", "typeId", "groupId"] });
       const sections = await ctx.orm.section.findAll({
-        where: { groupId: ctx.params.group_id }
+        where: { groupId: ctx.params.group_id },
+        offset: 1
       });
       return { sections };
     } catch (validationError) {
