@@ -1,8 +1,8 @@
 const KoaRouter = require("koa-router");
-const sectionFunctions = require("./sectionFunctions");
+const sectionFunctions = require("./sections/sectionFunctions");
 
 const router = new KoaRouter();
-const sections = require("./section");
+const sections = require("./sections/section");
 
 router.use("/:group_id/sections", sections.routes());
 

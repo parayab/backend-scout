@@ -2,11 +2,21 @@ const KoaRouter = require("koa-router");
 const sectionFunctions = require("./sectionFunctions");
 
 const router = new KoaRouter();
+const users = require("../users/sectionUsers");
+
+router.use("/:section_id/users", users.routes());
 
 router.get("sections.index", "/", async ctx => {
   const groupId = ctx.params.group_id;
   const sections = await ctx.orm.section.findAll({ where: { groupId } });
   ctx.body = { sections };
+});
+
+router.get("section.types", "/sectionTypes", async ctx => {
+  const sectionTypes = await ctx.orm.sectionType.findAll({
+    offset: 1
+  });
+  ctx.body = { sectionTypes };
 });
 
 router.get("sections.show", "/:section_id", async ctx => {
