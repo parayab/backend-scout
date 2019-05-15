@@ -60,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
       as: "participant"
-      // enables groupEvent.getParticipants()
+      // enables await groupEvent.getParticipant()
     });
   };
   return groupEvent;
