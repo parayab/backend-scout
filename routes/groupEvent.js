@@ -173,14 +173,20 @@ router.delete("groupEvent.delete", "/:groupEventId", async ctx => {
 
 router.get("groupEvent.getusers", "/:groupEventId/getusers", async ctx => {
   const groupId = ctx.params.group_id;
-  const groupEvent = await ctx.orm.groupEvent.findAll({
+  const groupEvent = await ctx.orm.groupEvent.findOne({
     where: {
       id: ctx.params.groupEventId,
       groupId
     }
   });
-  const participants = await groupEvent;
-  console.log(participants);
+  const participants = await groupEvent.getParticipant();
+  let users = {};
+  participants.forEach(participant => {
+    participant.getUser().then(user => {
+      users = { ...users, user };
+    });
+  });
+  ctx.body = users;
 });
 
 module.exports = router;

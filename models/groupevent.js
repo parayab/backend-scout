@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
   groupEvent.associate = models => {
     groupEvent.hasMany(models.userJoinGroupEvent, {
       // Will add groupEventId to userJoinGroupEvent model
-      foreignKey: "id",
+      foreignKey: "groupEventId",
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
       as: "participant"
