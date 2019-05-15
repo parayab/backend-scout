@@ -1,13 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
-  const userJoinGroupEvent = sequelize.define(
-    "userJoinGroupEvent",
+  const userJoinSectionEvent = sequelize.define(
+    "userJoinSectionEvent",
     {
-      groupEventId: {
+      sectionEventId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: {
-            msg: "GroupEventId can't be empty!!"
+            msg: "SectionEventId can't be empty!!"
           }
         }
       },
@@ -24,23 +24,23 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  userJoinGroupEvent.associate = models => {
-    userJoinGroupEvent.belongsTo(models.groupEvent, {
-      // Will add groupEventId to userJoinGroupEvent model
+  userJoinSectionEvent.associate = models => {
+    userJoinSectionEvent.belongsTo(models.sectionEvent, {
+      // Will add sectionEventId to userJoinSectionEvent model
       foreignKey: "id",
       onDelete: "set null",
       onUpdate: "CASCADE",
-      as: "groupEvent"
-      // enables groupEvent.getParticipants()
+      as: "sectionEvent"
+      // enables sectionEvent.getParticipants()
     });
-    userJoinGroupEvent.belongsTo(models.user, {
-      // Will add groupEventId to userJoinGroupEvent model
+    userJoinSectionEvent.belongsTo(models.user, {
+      // Will add sectionEventId to userJoinSectionEvent model
       foreignKey: "id",
       onDelete: "set null",
       onUpdate: "CASCADE",
       as: "user"
-      // enables groupEvent.getParticipants()
+      // enables sectionEvent.getParticipants()
     });
   };
-  return userJoinGroupEvent;
+  return userJoinSectionEvent;
 };

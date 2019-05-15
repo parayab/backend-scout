@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const groupEvent = sequelize.define(
-    "groupEvent",
+  const sectionEvent = sequelize.define(
+    "sectionEvent",
     {
       name: {
         type: DataTypes.STRING,
@@ -20,12 +20,12 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
-      groupId: {
+      sectionId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: {
-            msg: "GroupId can't be empty"
+            msg: "SectionId can't be empty"
           }
         }
       },
@@ -53,15 +53,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  groupEvent.associate = models => {
-    groupEvent.hasMany(models.userJoinGroupEvent, {
-      // Will add groupEventId to userJoinGroupEvent model
+  sectionEvent.associate = models => {
+    /*
+    sectionEvent.hasMany(models.userJoinGroupEvent, {
+      // Will add sectionEventId to userJoinGroupEvent model
       foreignKey: "id",
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
       as: "participant"
-      // enables groupEvent.getParticipants()
+      // enables sectionEvent.getParticipants()
     });
+    */
   };
-  return groupEvent;
+  return sectionEvent;
 };
