@@ -21,6 +21,29 @@ router.get("groupEvent.show", "/:groupEvent_id", async ctx => {
   ctx.body = { groupEvent };
 });
 
+router.get(
+  "groupEvent.addUser",
+  "/:groupEvent_id/addUser/:userId",
+  async ctx => {
+    const { group_id, userId, groupEvent_id } = ctx.params;
+    const user = await ctx.orm.user.findOne({
+      where: {
+        id: userId
+      }
+    });
+    const groupEvent = await ctx.orm.groupEvent.findOne({
+      where: {
+        id: groupEvent_id
+      }
+    });
+    const section = await user.getSection();
+    const the_users_group = await section.getGroup();
+    // if the_users_group != group_id => error!
+    // else continue
+    ctx.body = { theusersgroup: the_users_group.id, group_id };
+  }
+);
+
 router.post("groupEvent.create", "/", async ctx => {
   const groupId = ctx.params.group_id;
   const {
