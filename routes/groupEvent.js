@@ -149,12 +149,12 @@ router.patch("groupEvent.update", "/:groupEvent_id", async ctx => {
   }
 });
 
-router.delete("groupEvent.delete", "/:groupEvent_id", async ctx => {
+router.delete("groupEvent.delete", "/:groupEventId", async ctx => {
   try {
     const groupId = ctx.params.group_id;
     const groupEvent = await ctx.orm.groupEvent.findOne({
       where: {
-        id: ctx.params.groupEvent_id,
+        id: ctx.params.groupEventId,
         groupId
       }
     });
@@ -169,6 +169,18 @@ router.delete("groupEvent.delete", "/:groupEvent_id", async ctx => {
   } catch (error) {
     ctx.body = { message: error.message };
   }
+});
+
+router.get("groupEvent.getusers", "/:groupEventId/getusers", async ctx => {
+  const groupId = ctx.params.group_id;
+  const groupEvent = await ctx.orm.groupEvent.findAll({
+    where: {
+      id: ctx.params.groupEventId,
+      groupId
+    }
+  });
+  const participants = await groupEvent;
+  console.log(participants);
 });
 
 module.exports = router;
