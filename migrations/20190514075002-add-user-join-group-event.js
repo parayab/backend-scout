@@ -29,7 +29,7 @@ module.exports = {
           ["userId", "groupEventId"],
           {
             type: "unique",
-            name: "unique_userid_eventid"
+            name: "unique_userid_eventgroupid"
           }
         )
       ),
@@ -41,6 +41,12 @@ module.exports = {
         queryInterface.removeConstraint(
           "userJoinGroupEvents",
           "user_hasMany_userJoin"
+        )
+      )
+      .then(() =>
+        queryInterface.removeConstraint(
+          "userJoinGroupEvents",
+          "unique_userid_eventgroupid"
         )
       )
 };
