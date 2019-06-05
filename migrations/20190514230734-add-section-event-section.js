@@ -10,11 +10,9 @@ module.exports = {
       onDelete: "cascade",
       onUpdate: "cascade"
     }),
-
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface, Sequelize) =>
     queryInterface.removeConstraint(
       "sectionEvents",
       "section_event_belongs_to_section"
-    );
-  }
+    )
 };

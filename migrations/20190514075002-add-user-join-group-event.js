@@ -22,6 +22,16 @@ module.exports = {
           onDelete: "set null",
           onUpdate: "cascade"
         })
+      )
+      .then(() =>
+        queryInterface.addConstraint(
+          "userJoinGroupEvents",
+          ["userId", "groupEventId"],
+          {
+            type: "unique",
+            name: "unique_userid_eventid"
+          }
+        )
       ),
 
   down: queryInterface =>
