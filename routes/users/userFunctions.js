@@ -22,7 +22,7 @@ module.exports = {
           "email",
           "birthdate",
           "address",
-          "rolId",
+          "roleId",
           "sectionId",
           "groupId"
         ]

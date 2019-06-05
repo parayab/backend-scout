@@ -12,7 +12,6 @@ router.get("section.users.index", "/", async ctx => {
 router.post("section.users.create", "/", async ctx => {
   const sectionId = ctx.params.section_id;
   const groupId = ctx.params.group_id;
-
   const newUser = await userFunctions.create(ctx, {
     ...ctx.request.body,
     groupId,
