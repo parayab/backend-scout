@@ -32,56 +32,6 @@ router.get("groupEvent.participants", "/:groupEvent_id", async ctx => {
   ctx.body = { groupEvent };
 });
 
-router.post(
-  "groupEvent.addUser",
-  "/:groupEventId/addUser/:userId",
-  async ctx => {
-    const { userId, groupEventId } = ctx.params;
-    const { scholarship } = ctx.request.body;
-    const user = await ctx.orm.user.findOne({
-      where: {
-        id: userId
-      }
-    });
-    const groupEvent = await ctx.orm.groupEvent.findOne({
-      where: {
-        id: groupEventId
-      }
-    });
-    /*
-    const section = await user.getSection();
-    const theUsersGroup = await section.getGroup();
-    */
-    // Add user to groupEvent
-    const newUserJoinGroupEvent = ctx.orm.userJoinGroupEvent.build({
-      userId,
-      groupEventId,
-      scholarship
-    });
-
-    try {
-      await newUserJoinGroupEvent.save({
-        fields: ["userId", "groupEventId", "scholarship"]
-      });
-    } catch (validationError) {
-      ctx.body = { errors: validationError };
-      return;
-    }
-
-    ctx.body = {
-      scholarship,
-      groupEventId,
-      userId
-    };
-    /*
-    if (theUsersGroup == Number(group_id)) {
-      ctx.body = { theusersgroup: theUsersGroup.id, group_id };
-    } else {}
-    }
-    */
-  }
-);
-
 router.post("groupEvent.create", "/", async ctx => {
   const groupId = ctx.params.group_id;
   const {
