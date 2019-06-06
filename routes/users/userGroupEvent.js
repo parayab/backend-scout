@@ -49,7 +49,8 @@ router.patch("usergroupevent.updateUser", "/editUser/:userId", async ctx => {
     });
     userJoinGroupEvent.scholarship = scholarship;
     await userJoinGroupEvent.save();
-    ctx.body = { userJoinGroupEvent };
+    const userJoinGroupEvents = await ctx.orm.userJoinGroupEvent.findAll();
+    ctx.body = { userJoinGroupEvents };
   } catch (error) {
     ctx.body = { errors: error.message };
   }
