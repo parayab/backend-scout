@@ -30,11 +30,8 @@ router.post("usergroupevent.adduser", "/addUser/:userId", async ctx => {
     return;
   }
 
-  ctx.body = {
-    scholarship,
-    groupEventId,
-    userId
-  };
+  const userJoinGroupEvents = await ctx.orm.userJoinGroupEvent.findAll();
+  ctx.body = { userJoinGroupEvents };
 });
 
 router.patch("usergroupevent.updateUser", "/editUser/:userId", async ctx => {
