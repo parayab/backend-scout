@@ -55,4 +55,21 @@ router.patch("usergroupevent.updateUser", "/editUser/:userId", async ctx => {
   }
 });
 
+router.delete("usergroupevent.deleteUser", "/deleteUser/:userId", async ctx => {
+  try {
+    const { userId, groupEventId } = ctx.params;
+    const userJoinGroupEvent = await ctx.orm.userJoinGroupEvent.findOne({
+      where: {
+        userId,
+        groupEventId
+      }
+    });
+    await userJoinGroupEvent.destroy();
+    const userJoinGroupEvents = await ctx.orm.userJoinGroupEvent.findAll();
+    ctx.body = { userJoinGroupEvents };
+  } catch (error) {
+    ctx.body = { errors: error.message };
+  }
+});
+
 module.exports = router;
