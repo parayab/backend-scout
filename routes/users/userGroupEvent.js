@@ -37,4 +37,22 @@ router.post("usergroupevent.adduser", "/addUser/:userId", async ctx => {
   };
 });
 
+router.patch("usergroupevent.updateUser", "/editUser/:userId", async ctx => {
+  try {
+    const { userId, groupEventId } = ctx.params;
+    const { scholarship } = ctx.request.body;
+    const userJoinGroupEvent = await ctx.orm.userJoinGroupEvent.findOne({
+      where: {
+        userId,
+        groupEventId
+      }
+    });
+    userJoinGroupEvent.scholarship = scholarship;
+    await userJoinGroupEvent.save();
+    ctx.body = { userJoinGroupEvent };
+  } catch (error) {
+    ctx.body = { errors: error.message };
+  }
+});
+
 module.exports = router;
