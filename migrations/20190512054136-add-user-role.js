@@ -1,7 +1,5 @@
-"use strict";
-
 module.exports = {
-  up: (queryInterface, Sequelize) =>
+  up: queryInterface =>
     queryInterface.addConstraint("users", ["roleId"], {
       type: "foreign key",
       name: "user_belongs_to_role",
@@ -12,6 +10,6 @@ module.exports = {
       onDelete: "set null",
       onUpdate: "cascade"
     }),
-  down: (queryInterface, Sequelize) =>
+  down: queryInterface =>
     queryInterface.removeConstraint("users", "user_belongs_to_role")
 };
