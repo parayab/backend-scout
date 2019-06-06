@@ -117,16 +117,20 @@ router.get("groupEvent.getusers", "/:groupEventId/getusers", async ctx => {
     where: {
       id: ctx.params.groupEventId,
       groupId
-    }
+    },
+    include: ["participant"]
   });
-  const participants = await groupEvent.getParticipant();
-  let users = {};
-  participants.forEach(participant => {
-    participant.getUser().then(user => {
-      users = { ...users, user };
-    });
+  const users = [];
+  const promises = [];
+  groupEvent.participant.forEach(participant => {
+    promises.push(
+      participant.getUser().then(user => {
+        users.push(user);
+      })
+    );
   });
-  ctx.body = users;
+  await Promise.all(promises);
+  ctx.body = { users };
 });
 
 module.exports = router;
