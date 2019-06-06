@@ -2,8 +2,9 @@ const KoaRouter = require("koa-router");
 
 const router = new KoaRouter();
 
-// const sectionFunctions = require("./sectionFunctions");
-// const sections = require("./section");
+const userGroupEvent = require("./users/userGroupEvent");
+
+router.use("/:groupEventId/", userGroupEvent.routes());
 
 router.get("groupEvent.index", "/", async ctx => {
   const groupId = ctx.params.group_id;
@@ -18,17 +19,6 @@ router.get("groupEvent.show", "/:groupEvent_id", async ctx => {
       groupId: ctx.params.group_id
     }
   });
-  ctx.body = { groupEvent };
-});
-
-router.get("groupEvent.participants", "/:groupEvent_id", async ctx => {
-  const groupEvent = await ctx.orm.groupEvent.findAll({
-    where: {
-      id: ctx.params.groupEvent_id,
-      groupId: ctx.params.group_id
-    }
-  });
-
   ctx.body = { groupEvent };
 });
 
