@@ -62,6 +62,14 @@ module.exports = (sequelize, DataTypes) => {
       as: "participant"
       // enables await groupEvent.getParticipant()
     });
+    groupEvent.hasOne(models.checklist, {
+      // Will add groupEventId to checklist model
+      foreignKey: "groupEventId",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+      as: "checklist"
+      // enables await groupEvent.getChecklist()
+    });
   };
   return groupEvent;
 };
