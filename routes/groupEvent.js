@@ -2,8 +2,9 @@ const KoaRouter = require("koa-router");
 
 const router = new KoaRouter();
 
-// const sectionFunctions = require("./sectionFunctions");
-// const sections = require("./section");
+const userGroupEvent = require("./users/userGroupEvent");
+
+router.use("/:groupEventId", userGroupEvent.routes());
 
 router.get("groupEvent.index", "/", async ctx => {
   const groupId = ctx.params.group_id;
@@ -55,40 +56,81 @@ router.post("groupEvent.create", "/", async ctx => {
     ctx.body = { errors: validationError };
     return;
   }
-  ctx.body = { newGroupEvent };
+  const groupEvents = await ctx.orm.groupEvent.findAll({
+    where: {
+      groupId
+    }
+  });
+  ctx.body = { groupEvents };
 });
 
 router.patch("groupEvent.update", "/:groupEvent_id", async ctx => {
   try {
+    const groupId = ctx.params.group_id;
     const groupEvent = await ctx.orm.groupEvent.findOne({
       where: {
         id: ctx.params.groupEvent_id,
-        groupId: ctx.params.group_id
+        groupId
       }
     });
     Object.keys(ctx.request.body).forEach(field => {
       groupEvent[field] = ctx.request.body[field];
     });
     await groupEvent.save();
-    ctx.body = { groupEvent };
+
+    const groupEvents = await ctx.orm.groupEvent.findAll({
+      where: {
+        groupId
+      }
+    });
+    ctx.body = { groupEvents };
   } catch (error) {
     ctx.body = { errors: error.message };
   }
 });
 
-router.delete("groupEvent.delete", "/:groupEvent_id", async ctx => {
+router.delete("groupEvent.delete", "/:groupEventId", async ctx => {
   try {
+    const groupId = ctx.params.group_id;
     const groupEvent = await ctx.orm.groupEvent.findOne({
       where: {
-        id: ctx.params.groupEvent_id,
-        groupId: ctx.params.group_id
+        id: ctx.params.groupEventId,
+        groupId
       }
     });
     await groupEvent.destroy();
-    ctx.body = { message: "section deleted" };
+
+    const groupEvents = await ctx.orm.groupEvent.findAll({
+      where: {
+        groupId
+      }
+    });
+    ctx.body = { groupEvents };
   } catch (error) {
     ctx.body = { message: error.message };
   }
+});
+
+router.get("groupEvent.getusers", "/:groupEventId/getusers", async ctx => {
+  const groupId = ctx.params.group_id;
+  const groupEvent = await ctx.orm.groupEvent.findOne({
+    where: {
+      id: ctx.params.groupEventId,
+      groupId
+    },
+    include: ["participant"]
+  });
+  const users = [];
+  const promises = [];
+  groupEvent.participant.forEach(participant => {
+    promises.push(
+      participant.getUser().then(user => {
+        users.push(user);
+      })
+    );
+  });
+  await Promise.all(promises);
+  ctx.body = { users };
 });
 
 module.exports = router;

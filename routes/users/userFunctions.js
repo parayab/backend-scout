@@ -1,5 +1,5 @@
 module.exports = {
-  create: async function(ctx, requestBody) {
+  async create(ctx, requestBody) {
     //  requestBody = {
     //     surname1: string,
     //     surname2: string,
@@ -22,7 +22,7 @@ module.exports = {
           "email",
           "birthdate",
           "address",
-          "rolId",
+          "roleId",
           "sectionId",
           "groupId"
         ]
@@ -32,7 +32,7 @@ module.exports = {
       return validationError;
     }
   },
-  patch: async function(ctx, requestBody) {
+  async patch(ctx, requestBody) {
     try {
       const editUser = await ctx.orm.user.findOne({
         where: {

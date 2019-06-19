@@ -11,10 +11,9 @@ module.exports = {
       onUpdate: "cascade"
     }),
 
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface, Sequelize) =>
     queryInterface.removeConstraint(
       "groupEvents",
       "group_event_belongs_to_group"
-    );
-  }
+    )
 };

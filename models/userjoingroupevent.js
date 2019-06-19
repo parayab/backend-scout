@@ -27,16 +27,16 @@ module.exports = (sequelize, DataTypes) => {
   userJoinGroupEvent.associate = models => {
     userJoinGroupEvent.belongsTo(models.groupEvent, {
       // Will add groupEventId to userJoinGroupEvent model
-      foreignKey: "id",
-      onDelete: "set null",
+      foreignKey: "groupEventId",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
       as: "groupEvent"
       // enables groupEvent.getParticipants()
     });
     userJoinGroupEvent.belongsTo(models.user, {
-      // Will add groupEventId to userJoinGroupEvent model
-      foreignKey: "id",
-      onDelete: "set null",
+      // Will add userId to userJoinGroupEvent model
+      foreignKey: "userId",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
       as: "user"
       // enables groupEvent.getParticipants()
