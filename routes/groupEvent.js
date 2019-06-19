@@ -3,8 +3,10 @@ const KoaRouter = require("koa-router");
 const router = new KoaRouter();
 
 const userGroupEvent = require("./users/userGroupEvent");
+const checklist = require("./checklist");
 
 router.use("/:groupEventId", userGroupEvent.routes());
+router.use("/:groupEventId", checklist.routes());
 
 router.get("groupEvent.index", "/", async ctx => {
   const groupId = ctx.params.group_id;
