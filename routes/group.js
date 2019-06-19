@@ -63,4 +63,25 @@ router.delete("groups.delete", "/:group_id", async ctx => {
   }
 });
 
+router.get("group.users.index", "/:group_id/users", async ctx => {
+  const users = await ctx.orm.user.findAll({
+    include: [
+      {
+        attributes: ["name"],
+        model: ctx.orm.section,
+        required: true,
+        include: [
+          {
+            attributes: [],
+            model: ctx.orm.group,
+            as: "group",
+            required: true
+          }
+        ]
+      }
+    ]
+  });
+  ctx.body = { users };
+});
+
 module.exports = router;
