@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Name can't be empty"
           }
         },
-        unique: "uniqueEmail"
+        unique: true
       },
       birthdate: {
         type: DataTypes.DATE,
