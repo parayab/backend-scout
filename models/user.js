@@ -1,3 +1,14 @@
+const bcrypt = require("bcrypt");
+
+const PASSWORD_SALT = 8;
+
+async function buildPasswordHash(instance) {
+  if (instance.changed("password")) {
+    const hash = await bcrypt.hash(instance.password, PASSWORD_SALT);
+    instance.set("password", hash);
+  }
+}
+
 module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define(
     "user",
@@ -29,7 +40,8 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "Name can't be empty"
           }
-        }
+        },
+        unique: true
       },
       birthdate: {
         type: DataTypes.DATE,
@@ -66,10 +78,27 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Section can't be empty"
           }
         }
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Password can't be empty"
+          }
+        }
       }
     },
     {}
   );
+
+  user.beforeUpdate(buildPasswordHash);
+  user.beforeCreate(buildPasswordHash);
+
+  user.prototype.checkPassword = function checkPassword(password) {
+    return bcrypt.compare(password, this.password);
+  };
+
   // eslint-disable-next-line func-names
   user.associate = function(models) {
     // associations can be defined here
