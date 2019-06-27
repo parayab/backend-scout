@@ -8,6 +8,11 @@ router.put("session.create", "/login", async ctx => {
   const user = await ctx.orm.user.findOne({
     where: {
       email
+    },
+    include: {
+      attributes: ["groupId"],
+      model: ctx.orm.section,
+      required: true
     }
   });
   const isPasswordCorrect = user && (await user.checkPassword(password));
