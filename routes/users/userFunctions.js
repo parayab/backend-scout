@@ -24,7 +24,8 @@ module.exports = {
           "address",
           "roleId",
           "sectionId",
-          "groupId"
+          "groupId",
+          "password"
         ]
       });
       return { newUser };

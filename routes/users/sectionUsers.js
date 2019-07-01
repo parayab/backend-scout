@@ -15,7 +15,8 @@ router.post("section.users.create", "/", async ctx => {
   const newUser = await userFunctions.create(ctx, {
     ...ctx.request.body,
     groupId,
-    sectionId
+    sectionId,
+    password: ctx.request.body.email.slice(0, 6)
   });
   if (newUser instanceof Error) {
     ctx.body = newUser.errors;
