@@ -3,7 +3,14 @@ const KoaRouter = require("koa-router");
 const router = new KoaRouter();
 
 router.get("groupTransactions.index", "/", async ctx => {
+  let { page, pageSize } = ctx.query;
+  page = page || 0;
+  pageSize = pageSize || 20;
+  const offset = page * pageSize;
+  const limit = offset + pageSize;
   const transactions = await ctx.orm.groupTransaction.findAll({
+    offset,
+    limit,
     where: { groupId: ctx.params.group_id }
   });
   ctx.body = transactions;
@@ -21,7 +28,14 @@ router.post("groupTransactions.create", "/", async ctx => {
     await newTransaction.save({
       fields: ["amount", "income", "category", "groupId"]
     });
+    let { page, pageSize } = ctx.query;
+    page = page || 0;
+    pageSize = pageSize || 20;
+    const offset = page * pageSize;
+    const limit = offset + pageSize;
     const transactions = await ctx.orm.groupTransaction.findAll({
+      offset,
+      limit,
       where: { groupId: ctx.params.group_id }
     });
     ctx.body = transactions;
