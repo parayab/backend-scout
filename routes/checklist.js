@@ -5,6 +5,7 @@ const router = new KoaRouter();
 router.get("checklist.index", "/checklist", async ctx => {
   const { groupEventId } = ctx.params;
   const checklist = await ctx.orm.checklist.findAll({
+    order: ["id"],
     where: {
       groupEventId
     }
@@ -26,12 +27,14 @@ router.post("checklist.create", "/checklist", async ctx => {
       fields: ["name", "groupEventId"]
     });
     const checklists = await ctx.orm.checklist.findAll({
+      order: ["id"],
       where: {
         groupEventId
       }
     });
     ctx.body = { checklists };
   } catch (validationError) {
+    ctx.status = 400;
     ctx.body = { errors: validationError };
   }
 });
