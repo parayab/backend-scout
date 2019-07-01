@@ -18,7 +18,7 @@ const config = {
   },
   production: {
     extend: "default",
-    database: "backend_production"
+    database: process.env.PROD_DB_NAME
   }
 };
 
