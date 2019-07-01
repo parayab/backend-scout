@@ -62,6 +62,13 @@ module.exports = (sequelize, DataTypes) => {
       as: "participant"
       // enables group.getParticipants()
     });
+    group.hasMany(models.groupTransaction, {
+      foreignKey: "id",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+      as: "transaction"
+      // enables group.getTransactions()
+    });
   };
   return group;
 };
