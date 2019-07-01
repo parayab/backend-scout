@@ -8,12 +8,13 @@ router.get("groupTransactions.index", "/", async ctx => {
   pageSize = pageSize || 20;
   const offset = page * pageSize;
   const limit = offset + pageSize;
-  const transactions = await ctx.orm.groupTransaction.findAll({
+  const transactions = await ctx.orm.groupTransaction.findAndCountAll({
     offset,
     limit,
     where: { groupId: ctx.params.group_id }
   });
-  ctx.body = transactions;
+  const totalPages = Math.ceil(transactions.count / pageSize);
+  ctx.body = { transactions: transactions.rows, totalPages };
 });
 
 router.post("groupTransactions.create", "/", async ctx => {
@@ -34,12 +35,13 @@ router.post("groupTransactions.create", "/", async ctx => {
     pageSize = pageSize || 20;
     const offset = page * pageSize;
     const limit = offset + pageSize;
-    const transactions = await ctx.orm.groupTransaction.findAll({
+    const transactions = await ctx.orm.groupTransaction.findAndCountAll({
       offset,
       limit,
       where: { groupId: ctx.params.group_id }
     });
-    ctx.body = transactions;
+    const totalPages = Math.ceil(transactions.count / pageSize);
+    ctx.body = { transactions: transactions.rows, totalPages };
   } catch (error) {
     ctx.status = 400;
     ctx.body = { error };
