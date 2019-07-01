@@ -11,6 +11,15 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
+      date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Date can't be empty"
+          }
+        }
+      },
       groupId: {
         type: DataTypes.INTEGER,
         allowNull: false,

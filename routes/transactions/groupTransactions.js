@@ -17,16 +17,17 @@ router.get("groupTransactions.index", "/", async ctx => {
 });
 
 router.post("groupTransactions.create", "/", async ctx => {
-  const { amount, income, category } = ctx.request.body;
+  const { amount, income, category, date } = ctx.request.body;
   const newTransaction = ctx.orm.groupTransaction.build({
     amount,
     income,
     category,
+    date,
     groupId: ctx.params.group_id
   });
   try {
     await newTransaction.save({
-      fields: ["amount", "income", "category", "groupId"]
+      fields: ["amount", "income", "category", "groupId", "date"]
     });
     let { page, pageSize } = ctx.query;
     page = page || 0;
