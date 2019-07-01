@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
             msg: "GroupEventId can't be empty!!"
           }
         }
-      }
+      },
+      completed: DataTypes.BOOLEAN
     },
     {}
   );
