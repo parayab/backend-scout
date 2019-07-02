@@ -3,10 +3,12 @@ const home = require("./home");
 const book = require("./book");
 const group = require("./group");
 // const section = require("./section");
-const user = require("./users/sectionUsers");
+// const user = require("./users/sectionUsers");
 const session = require("./session");
 
-const router = new Router();
+const router = new Router({
+  prefix: "/users"
+});
 
 router.use("/", home.routes());
 router.use("/books", book.routes());
