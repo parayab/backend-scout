@@ -7,7 +7,7 @@ router.get("groupTransactions.index", "/", async ctx => {
   page = page || 0;
   pageSize = pageSize || 20;
   const offset = page * pageSize;
-  const limit = offset + pageSize;
+  const limit = pageSize;
   const transactions = await ctx.orm.groupTransaction.findAndCountAll({
     offset,
     limit,
@@ -34,7 +34,7 @@ router.post("groupTransactions.create", "/", async ctx => {
     page = page || 0;
     pageSize = pageSize || 20;
     const offset = page * pageSize;
-    const limit = offset + pageSize;
+    const limit = pageSize;
     const transactions = await ctx.orm.groupTransaction.findAndCountAll({
       offset,
       limit,
