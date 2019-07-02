@@ -1,4 +1,7 @@
 const KoaRouter = require("koa-router");
+const Sequelize = require("sequelize");
+
+const { Op } = Sequelize;
 
 const router = new KoaRouter();
 
@@ -60,5 +63,54 @@ router.delete("groupTransactions.delete", "/:id", async ctx => {
     ctx.body = { error };
   }
 });
+
+router.get("groupTransactions.dashboard", "/dashboard_detail", async ctx => {
+  const { initialDate } = ctx.query;
+  try {
+    const transactions = await ctx.orm.groupTransaction.findAll({
+      where: {
+        groupId: ctx.params.group_id,
+        date: { [Op.gte]: initialDate }
+      },
+      attributes: [
+        "income",
+        [Sequelize.fn("COUNT", Sequelize.col("income")), "n_incomes"],
+        [Sequelize.fn("sum", Sequelize.col("amount")), "sum_incomes"],
+        [
+          Sequelize.fn("date_trunc", "month", Sequelize.col("date")),
+          "income_date"
+        ]
+      ],
+      group: ["income_date", "income"]
+    });
+    ctx.body = { transactions };
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error };
+  }
+});
+
+router.get(
+  "groupTransactions.dashboard",
+  "/dashboard_aggregated",
+  async ctx => {
+    try {
+      const transactions = await ctx.orm.groupTransaction.findAll({
+        where: {
+          groupId: ctx.params.group_id
+        },
+        attributes: [
+          "income",
+          [Sequelize.fn("sum", Sequelize.col("amount")), "sum_incomes"]
+        ],
+        group: "income"
+      });
+      ctx.body = { transactions };
+    } catch (error) {
+      ctx.status = 400;
+      ctx.body = { error };
+    }
+  }
+);
 
 module.exports = router;
