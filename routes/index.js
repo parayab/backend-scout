@@ -6,14 +6,12 @@ const group = require("./group");
 // const user = require("./users/sectionUsers");
 const session = require("./session");
 
-const router = new Router({
-  prefix: "/users"
-});
+const router = new Router();
 
-router.use("/", home.routes());
-router.use("/books", book.routes());
-router.use("/groups", group.routes());
-router.use("/session", session.routes());
+router.use("/api", home.routes());
+router.use("/api/books", book.routes());
+router.use("/api/groups", group.routes());
+router.use("/api/session", session.routes());
 // router.use("/sections", section.routes());
 // router.use("/users", user.routes());
 
