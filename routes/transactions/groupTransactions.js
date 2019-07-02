@@ -11,7 +11,7 @@ router.get("groupTransactions.index", "/", async ctx => {
   const transactions = await ctx.orm.groupTransaction.findAndCountAll({
     offset,
     limit,
-    order: [["id", "DESC"]],
+    order: [["date", "DESC"]],
     where: { groupId: ctx.params.group_id }
   });
   const totalPages = Math.ceil(transactions.count / pageSize);
@@ -39,7 +39,7 @@ router.post("groupTransactions.create", "/", async ctx => {
     const transactions = await ctx.orm.groupTransaction.findAndCountAll({
       offset,
       limit,
-      order: [["id", "DESC"]],
+      order: [["date", "DESC"]],
       where: { groupId: ctx.params.group_id }
     });
     const totalPages = Math.ceil(transactions.count / pageSize);
