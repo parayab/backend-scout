@@ -1,7 +1,10 @@
+/* eslint-disable func-names */
+/* eslint-disable require-yield */
 const Koa = require("koa");
 const helmet = require("koa-helmet");
 const koaBody = require("koa-body");
 const logger = require("koa-logger");
+const cors = require("koa-cors");
 const routes = require("./routes/index");
 const orm = require("./models");
 
@@ -29,6 +32,13 @@ app.use(koaBody());
 
 // HTTP request logger
 app.use(logger());
+
+// Cors
+const options = {
+  origin: "*",
+  methods: "GET, PUT, POST, PATCH, DELETE, OPTIONS"
+};
+app.use(cors(options));
 
 // routing
 app.use(routes.routes());
