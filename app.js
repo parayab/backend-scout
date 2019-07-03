@@ -35,7 +35,8 @@ app.use(logger());
 
 // Cors
 const options = {
-  origin: "*"
+  origin: "*",
+  methods: "GET, PUT, POST, PATCH, DELETE, OPTIONS"
 };
 app.use(cors(options));
 
